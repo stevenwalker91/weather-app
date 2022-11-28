@@ -14,7 +14,7 @@ const getCoordinates = async (location = "dundee") => {
     const lat = coords[0].lat;
     const lon = coords[0].lon;
     // TODO: some logic so if the coords response is blank, prompt the user
-    return { lat, lon };
+    return coords[0];
   } catch (err) {
     console.log(err);
   }

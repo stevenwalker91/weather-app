@@ -27,11 +27,13 @@ const updateBackground = (condition) => {
   app.style.backgroundImage = `linear-gradient(to right, rgb(255 255 255 / 0%), rgb(0 0 0 / 45%)),url(\"assets/${url}.jpg\")`;
 };
 
-const addWeatherToUI = (weatherPayload) => {
+const addWeatherToUI = (weatherPayload, locationData) => {
   const app = document.getElementById("current-weather");
   const location = document.getElementById("location");
+  const weatherDescription = document.getElementById("weather-description");
 
-  location.innerText = weatherPayload.name;
+  location.innerText = `${locationData.name}, ${locationData.state}`;
+  weatherDescription = weatherPayload.weather[0].description;
   console.log(weatherPayload);
 };
 

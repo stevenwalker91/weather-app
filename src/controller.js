@@ -12,16 +12,17 @@ const orchestrateCityInput = async (defaultCity) => {
   } else {
     city = cityInput.value;
   }
-  const coords = weather
-    .getCoordinates(cityInput.value)
-    .then((data) => {
-      const currentWeather = weather.getCurrentWeather(data.lat, data.lon);
-      return { currentWeather, data };
-    })
-    .then((fulfilled) => {
-      console.log(fulfilled.currentWeather);
-      display.updateBackground(fulfilled.weather[0].main);
-      display.addWeatherToUI(fulfilled);
+  const coords = weather.getCoordinates(city);
+  const weatherData = coords.then((data) => {
+    console.log(data);
+    const currentWeather = weather.getCurrentWeather(data.lat, data.lon);
+    return currentWeather;
+  });
+
+  return Promise.all([coords, weatherData])
+    .then(([coords, weatherData]) => {
+      display.updateBackground(weatherData.weather[0].main);
+      display.addWeatherToUI(weatherData, coords);
     })
     .catch((err) => {
       console.log(err);
