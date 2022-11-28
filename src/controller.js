@@ -1,10 +1,8 @@
 import * as weather from "./weather";
 import * as display from "./display";
 
-const cityInput = document.getElementById("city-search");
-
-// when the city us updated, function is called to co-ordinate all the functions to be executed as a result
-const orchestrateCityInput = async (defaultCity) => {
+// when the city is updated, function is called to co-ordinate all the functions to be executed as a result
+const orchestrateCityInput = async (defaultCity, cityInput) => {
   // first check if default city is true which allows a default to be called on page load
   let city;
   if (defaultCity === true) {
@@ -12,13 +10,15 @@ const orchestrateCityInput = async (defaultCity) => {
   } else {
     city = cityInput.value;
   }
+
+  // call function to get coords and when get the weather when promise resolved
   const coords = weather.getCoordinates(city);
   const weatherData = coords.then((data) => {
-    console.log(data);
     const currentWeather = weather.getCurrentWeather(data.lat, data.lon);
     return currentWeather;
   });
 
+  //by then using promise all, we can also get the initial coords data
   return Promise.all([coords, weatherData])
     .then(([coords, weatherData]) => {
       display.updateBackground(weatherData.weather[0].main);
@@ -27,7 +27,8 @@ const orchestrateCityInput = async (defaultCity) => {
     .catch((err) => {
       console.log(err);
     });
-  // clear out the input field
+
+  // clear out the input field so user can easily research
   cityInput.value = "";
 };
 

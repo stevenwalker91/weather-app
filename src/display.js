@@ -32,8 +32,8 @@ const addWeatherToUI = (weatherPayload, locationData) => {
   const location = document.getElementById("location");
   const weatherDescription = document.getElementById("weather-description");
 
-  location.innerText = `${locationData.name}, ${locationData.state}`;
-  weatherDescription = weatherPayload.weather[0].description;
+  location.innerText = `${locationData.name}, ${locationData.state}, ${locationData.country}`;
+  weatherDescription.innerText = weatherPayload.weather[0].description;
   console.log(weatherPayload);
 };
 
