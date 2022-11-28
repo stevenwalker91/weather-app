@@ -1,0 +1,43 @@
+body {
+    margin: 0px;
+    color: white;
+    font-family: 'Roboto', sans-serif;
+}
+
+#app {
+    min-height: 100vh;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+#current-weather>.inner-container {
+
+}
+
+#current-weather {
+    justify-content: center;
+}
+
+label {
+    display: none;
+}
+
+form {
+    margin: 10px;
+}
+
+.flex {
+    display: flex;
+}
+
+header {
+    justify-content: flex-end;
+}
+
+input {
+    box-shadow: none;
+    padding: 8px;
+}

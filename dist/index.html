@@ -6,8 +6,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Weather App</title>
     <script src="main.js" defer></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com"> 
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
 </head>
 <body>
+    <div id="app" class="flex">
+        <header class="flex">
+            <form id="city-form">
+                <label for="city-search">Enter city</label>
+                <input type="text" id="city-search" name="city-search" placeholder="Enter city">
+            </form>
+        </header>
+        <div id="current-weather" class="flex">
+            <div class="inner-container">
+                <div id ="location"></div>
+                <div id="weather-description">13degrees</div>
+
+
+            </div>
+        </div>
+        <div id="forecast-weather"></div>
+    </div>
     
 </body>
 </html>

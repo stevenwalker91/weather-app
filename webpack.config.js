@@ -1,40 +1,41 @@
-const path = require('path');
+const path = require("path");
 
 module.exports = {
-	mode: 'development',
-	entry: './src/index.js',
-	devtool: 'inline-source-map',
-	devServer: {
-		static: './dist',
-	},
-	output: {
-		filename: '[name].js',
-		path: path.resolve(__dirname, 'dist'),
-		clean: {
-			keep: 'index.html',
-		},
-	},
+  mode: "development",
+  entry: "./src/index.js",
+  devtool: "inline-source-map",
+  devServer: {
+    static: "./dist",
+  },
+  output: {
+    filename: "[name].js",
+    path: path.resolve(__dirname, "dist"),
+    assetModuleFilename: "assets/[name][ext]",
+    clean: {
+      keep: "index.html",
+    },
+  },
 
-	module: {
-		rules: [
-			{
-				test: /\.css$/i,
-				use: ['style-loader', 'css-loader'],
-			},
-			{
-				test: /\.(png|svg|jpg|jpeg|gif)$/i,
-				type: 'asset/resource',
-			},
-			{
-				test: /\.m?js$/,
-				exclude: /node_modules/,
-				use: {
-					loader: 'babel-loader',
-					options: {
-						presets: [['@babel/preset-env', { targets: 'defaults' }]],
-					},
-				},
-			},
-		],
-	},
+  module: {
+    rules: [
+      {
+        test: /\.css$/i,
+        use: ["style-loader", "css-loader"],
+      },
+      {
+        test: /\.(png|svg|jpg|jpeg|gif)$/i,
+        type: "asset/resource",
+      },
+      {
+        test: /\.m?js$/,
+        exclude: /node_modules/,
+        use: {
+          loader: "babel-loader",
+          options: {
+            presets: [["@babel/preset-env", { targets: "defaults" }]],
+          },
+        },
+      },
+    ],
+  },
 };
