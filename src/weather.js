@@ -19,10 +19,9 @@ const getCoordinates = async (location = "dundee") => {
 const getCurrentWeather = async (lat, lon) => {
   try {
     const response = await fetch(
-      `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${key}`
+      `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&&units=metric&appid=${key}`
     );
     const weatherData = await response.json();
-    //console.log(weatherData);
     return weatherData;
   } catch (err) {
     console.log(err);
