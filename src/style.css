@@ -14,11 +14,18 @@ body {
 }
 
 #current-weather>.inner-container {
-
+    background-color: rgba(1, 1, 1, 0.6);
+    padding: 30px;
+    border-radius: 10px;
+    grid-template-columns: 1fr 1fr;
 }
 
 #current-weather {
     justify-content: center;
+}
+
+#temperature {
+    font-size: 7em;
 }
 
 label {
@@ -31,6 +38,10 @@ form {
 
 .flex {
     display: flex;
+}
+
+.grid {
+    display: grid;
 }
 
 header {

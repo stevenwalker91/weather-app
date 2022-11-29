@@ -2,13 +2,9 @@
 const key = "1b98fd1c628af9f19174dd392caa9780";
 
 const getCoordinates = async (location = "dundee") => {
-  let loc = location;
-  if (loc === "") {
-    loc = "dundee";
-  }
   try {
     const response = await fetch(
-      `http://api.openweathermap.org/geo/1.0/direct?q=${loc}&appid=${key}`
+      `http://api.openweathermap.org/geo/1.0/direct?q=${location}&appid=${key}`
     );
     const coords = await response.json();
     const lat = coords[0].lat;
