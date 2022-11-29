@@ -4,42 +4,7 @@ import drizzle from "./assets/drizzle.jpg";
 import rain from "./assets/rain.jpg";
 import atmosphere from "./assets/atmosphere.jpg";
 import snow from "./assets/snow.jpg";
-
-// TODO: consider moving this out to a util file
-const capitaliseFirstLetter = (string) => {
-  return string.charAt(0).toUpperCase() + string.slice(1);
-};
-
-const returnDateFromUnix = (date) => {
-  const unixDate = new Date(date * 1000);
-  const formattedDate = unixDate.toLocaleString();
-  return formattedDate;
-};
-
-const degToCompass = (degrees) => {
-  const val = Math.floor(degrees / 22.5 + 0.5);
-  const arr = [
-    "N",
-    "NNE",
-    "NE",
-    "ENE",
-    "E",
-    "ESE",
-    "SE",
-    "SSE",
-    "S",
-    "SSW",
-    "SW",
-    "WSW",
-    "W",
-    "WNW",
-    "NW",
-    "NNW",
-  ];
-  return arr[val % 16];
-};
-
-const getIcon = (weather) => {};
+import * as utils from "./utils";
 
 const clearCityInput = () => {
   const city = document.getElementById("city-search");
@@ -83,12 +48,15 @@ const addWeatherToUI = (weatherPayload, locationData) => {
   location.innerText = `${locationData.name}, ${locationData.state}`;
 
   // DESCRIPTION
-  weatherDescription.innerText = capitaliseFirstLetter(
+  weatherDescription.innerText = utils.capitaliseFirstLetter(
     weatherPayload.weather[0].description
   );
 
   // ICON
-  icon.src = `http://openweathermap.org/img/wn/${weatherPayload.weather[0].icon}.png`;
+  icon.innerText = utils.getIcon(
+    weatherPayload.weather[0].id,
+    utils.checkDayTime(utils.returnDateFromUnix(weatherPayload.dt))
+  );
 
   // TEMPERATURE
   temp.innerHTML = `${Math.round(
@@ -101,11 +69,15 @@ const addWeatherToUI = (weatherPayload, locationData) => {
   )}<span>&#176;</span>c`;
 
   // DATE AND TIME
-  dateChecked.innerText = returnDateFromUnix(weatherPayload.dt);
+  dateChecked.innerText = utils
+    .returnDateFromUnix(weatherPayload.dt)
+    .toLocaleString();
 
   // WIND
   windSpeed.innerText = `${Math.round(weatherPayload.wind.speed)}`;
-  windDirection.innerText = degToCompass(weatherPayload.wind.deg);
+  // rotate the wind icon to show the appropriate direction (minus from 360 to reverse it)
+  windDirection.style.transform = `rotate(${360 - weatherPayload.wind.deg}deg)`;
+  utils.checkDayTime(utils.returnDateFromUnix(weatherPayload.dt));
 };
 
 export { updateBackground, addWeatherToUI, clearCityInput };
