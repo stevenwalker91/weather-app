@@ -24,11 +24,40 @@
                     <img id="icon">
                 </div>
                 <div id="temperature"></div>
-                <div id="weather-description"></div>
                 
-                <div id="feels-like"></div>
-                <div id="date-checked"></div>
-                <div id ="location"></div>
+                <div id="details-container" class="flex">
+                    <div class="detail-container flex">
+                        <div class="detail-title">Description</div>
+                        <div id="weather-description"></div>
+                    </div>
+                    <div class="detail-container flex">
+                        <div class="detail-title">Feels like</div>
+                        <div id="feels-like"></div>
+                    </div>
+                    <div class="detail-container flex">
+                        <div class="detail-title">Wind Speed (MPH)</div>
+                        <div id="wind-speed"></div>
+                    </div>
+                    <div class="detail-container flex">
+                        <div class="detail-title">Wind Direction</div>
+                        <div id="wind-direction"></div>
+                    </div>
+                    <div class="detail-container flex">
+                        <div class="detail-title">Chance of rain</div>
+                        <div id="rain-chance">20%</div>
+                    </div>
+                </div>
+                <div id="details-container" class="flex">
+                    <div class="detail-container flex">
+                        <div class="detail-title">Location</div>
+                        <div id ="location"></div>
+                    </div>
+                    <div class="detail-container flex">
+                        <div class="detail-title">Refreshed at:</div>
+                        <div id="date-checked"></div>
+                    </div>
+                </div>
+                
 
 
 
