@@ -4,7 +4,7 @@ const key = "1b98fd1c628af9f19174dd392caa9780";
 const getCoordinates = async (location = "dundee") => {
   try {
     const response = await fetch(
-      `http://api.openweathermap.org/geo/1.0/direct?q=${location}&appid=${key}`
+      `https://api.openweathermap.org/geo/1.0/direct?q=${location}&appid=${key}`
     );
     const coords = await response.json();
     const lat = coords[0].lat;
@@ -28,4 +28,12 @@ const getCurrentWeather = async (lat, lon) => {
   }
 };
 
-export { getCoordinates, getCurrentWeather };
+const getWeatherForecast = async (lat, lon) => {
+  try {
+    const response = await fetch(`url......`);
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export { getCoordinates, getCurrentWeather, getWeatherForecast };
