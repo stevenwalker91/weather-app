@@ -18,6 +18,9 @@ const orchestrateCityInput = async (defaultCity, cityInput) => {
     return currentWeather;
   });
 
+  // clear out the input field so user can easily research
+  display.clearCityInput();
+
   //by then using promise all, we can also get the initial coords data
   return Promise.all([coords, weatherData])
     .then(([coords, weatherData]) => {
@@ -27,9 +30,6 @@ const orchestrateCityInput = async (defaultCity, cityInput) => {
     .catch((err) => {
       console.log(err);
     });
-
-  // clear out the input field so user can easily research
-  cityInput.value = "";
 };
 
 export { orchestrateCityInput };

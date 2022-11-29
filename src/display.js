@@ -13,8 +13,37 @@ const capitaliseFirstLetter = (string) => {
 const returnDateFromUnix = (date) => {
   const unixDate = new Date(date * 1000);
   const formattedDate = unixDate.toLocaleString();
-  console.log(formattedDate);
   return formattedDate;
+};
+
+const degToCompass = (degrees) => {
+  const val = Math.floor(degrees / 22.5 + 0.5);
+  const arr = [
+    "N",
+    "NNE",
+    "NE",
+    "ENE",
+    "E",
+    "ESE",
+    "SE",
+    "SSE",
+    "S",
+    "SSW",
+    "SW",
+    "WSW",
+    "W",
+    "WNW",
+    "NW",
+    "NNW",
+  ];
+  return arr[val % 16];
+};
+
+const getIcon = (weather) => {};
+
+const clearCityInput = () => {
+  const city = document.getElementById("city-search");
+  city.value = "";
 };
 
 const updateBackground = (condition) => {
@@ -40,28 +69,43 @@ const updateBackground = (condition) => {
 };
 
 const addWeatherToUI = (weatherPayload, locationData) => {
-  const app = document.getElementById("current-weather");
+  // list out all the elements to update
   const location = document.getElementById("location");
   const weatherDescription = document.getElementById("weather-description");
   const temp = document.getElementById("temperature");
   const feelsLike = document.getElementById("feels-like");
   const dateChecked = document.getElementById("date-checked");
   const icon = document.getElementById("icon");
+  const windSpeed = document.getElementById("wind-speed");
+  const windDirection = document.getElementById("wind-direction");
 
-  location.innerText = `${locationData.name}, ${locationData.state}, ${locationData.country}`;
+  // LOCATION
+  location.innerText = `${locationData.name}, ${locationData.state}`;
+
+  // DESCRIPTION
   weatherDescription.innerText = capitaliseFirstLetter(
     weatherPayload.weather[0].description
   );
+
+  // ICON
   icon.src = `http://openweathermap.org/img/wn/${weatherPayload.weather[0].icon}.png`;
+
+  // TEMPERATURE
   temp.innerHTML = `${Math.round(
     weatherPayload.main.temp
   )}<span>&#176;</span>c`;
-  feelsLike.innerHTML = `Feels Like: ${Math.round(
+
+  // FEELS LIKE TEMPERATURE
+  feelsLike.innerHTML = `${Math.round(
     weatherPayload.main.feels_like
   )}<span>&#176;</span>c`;
+
+  // DATE AND TIME
   dateChecked.innerText = returnDateFromUnix(weatherPayload.dt);
 
-  console.log(weatherPayload);
+  // WIND
+  windSpeed.innerText = `${Math.round(weatherPayload.wind.speed)}`;
+  windDirection.innerText = degToCompass(weatherPayload.wind.deg);
 };
 
-export { updateBackground, addWeatherToUI };
+export { updateBackground, addWeatherToUI, clearCityInput };
