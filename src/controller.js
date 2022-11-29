@@ -11,25 +11,25 @@ const orchestrateCityInput = async (defaultCity, cityInput) => {
     city = cityInput.value;
   }
 
-  // call function to get coords and when get the weather when promise resolved
+  // call function to get coords
   const coords = weather.getCoordinates(city);
-  const weatherData = coords.then((data) => {
-    const currentWeather = weather.getCurrentWeather(data.lat, data.lon);
-    return currentWeather;
+  // when the promise is resolved, use promise all to get the current and future forecast
+  const weatherData = coords.then((coords) => {
+    const currentWeatherAPI = weather.getCurrentWeather(coords.lat, coords.lon);
+    const futureForecastAPI = weather.getWeatherForecast(
+      coords.lat,
+      coords.lon
+    );
+    Promise.all([currentWeatherAPI, futureForecastAPI]).then(
+      ([current, future]) => {
+        display.updateBackground(current.weather[0].main);
+        display.addWeatherToUI(current, coords);
+      }
+    );
   });
 
   // clear out the input field so user can easily research
   display.clearCityInput();
-
-  //by then using promise all, we can also get the initial coords data
-  return Promise.all([coords, weatherData])
-    .then(([coords, weatherData]) => {
-      display.updateBackground(weatherData.weather[0].main);
-      display.addWeatherToUI(weatherData, coords);
-    })
-    .catch((err) => {
-      console.log(err);
-    });
 };
 
 export { orchestrateCityInput };

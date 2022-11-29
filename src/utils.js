@@ -33,6 +33,8 @@ const getIcon = (weatherID, dayTime) => {
     icon += dayTime;
   }
 
+  // TODO add icon for 700 range
+
   return icon;
 };
 

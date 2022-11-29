@@ -7,8 +7,6 @@ const getCoordinates = async (location = "dundee") => {
       `https://api.openweathermap.org/geo/1.0/direct?q=${location}&appid=${key}`
     );
     const coords = await response.json();
-    const lat = coords[0].lat;
-    const lon = coords[0].lon;
     // TODO: some logic so if the coords response is blank, prompt the user
     return coords[0];
   } catch (err) {
@@ -30,7 +28,11 @@ const getCurrentWeather = async (lat, lon) => {
 
 const getWeatherForecast = async (lat, lon) => {
   try {
-    const response = await fetch(`url......`);
+    const response = await fetch(
+      `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${key}`
+    );
+    const forecastData = await response.json();
+    return forecastData;
   } catch (err) {
     console.log(err);
   }
