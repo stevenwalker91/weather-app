@@ -3,7 +3,10 @@ import * as display from "./display";
 
 // when the city is updated, function is called to co-ordinate all the functions to be executed as a result
 const orchestrateCityInput = async (defaultCity, cityInput) => {
-  // first check if default city is true which allows a default to be called on page load
+  // update UI to inicate loading
+  display.manageLoading();
+
+  // check if default city is true which allows a default to be called on page load
   let city;
   if (defaultCity === true) {
     city = "dundee";
@@ -24,6 +27,8 @@ const orchestrateCityInput = async (defaultCity, cityInput) => {
       ([current, future]) => {
         display.updateBackground(current.weather[0].main);
         display.addWeatherToUI(current, coords, future);
+        // now remove the loading view that promise is resolved
+        display.manageLoading();
       }
     );
   });

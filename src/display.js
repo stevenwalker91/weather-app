@@ -84,4 +84,12 @@ const addWeatherToUI = (weatherPayload, locationData, futureWeather) => {
   rainChance.innerText = `${futureWeather.list[0].pop * 100}%`;
 };
 
-export { updateBackground, addWeatherToUI, clearCityInput };
+const manageLoading = () => {
+  const currentWeatherDialog = document.getElementById("current-weather");
+  const spinner = document.getElementById("spinner");
+
+  spinner.classList.toggle("show");
+  currentWeatherDialog.classList.toggle("hide");
+};
+
+export { updateBackground, addWeatherToUI, clearCityInput, manageLoading };

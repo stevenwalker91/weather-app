@@ -20,6 +20,7 @@ const getCurrentWeather = async (lat, lon) => {
       `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&&units=metric&appid=${key}`
     );
     const weatherData = await response.json();
+
     return weatherData;
   } catch (err) {
     console.log(err);
