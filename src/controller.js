@@ -23,7 +23,7 @@ const orchestrateCityInput = async (defaultCity, cityInput) => {
     Promise.all([currentWeatherAPI, futureForecastAPI]).then(
       ([current, future]) => {
         display.updateBackground(current.weather[0].main);
-        display.addWeatherToUI(current, coords);
+        display.addWeatherToUI(current, coords, future);
       }
     );
   });

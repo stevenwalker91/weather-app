@@ -33,7 +33,7 @@ const updateBackground = (condition) => {
   app.style.backgroundImage = `linear-gradient(to right, rgb(255 255 255 / 0%), rgb(0 0 0 / 45%)),url(\"assets/${url}.jpg\")`;
 };
 
-const addWeatherToUI = (weatherPayload, locationData) => {
+const addWeatherToUI = (weatherPayload, locationData, futureWeather) => {
   // list out all the elements to update
   const location = document.getElementById("location");
   const weatherDescription = document.getElementById("weather-description");
@@ -43,6 +43,7 @@ const addWeatherToUI = (weatherPayload, locationData) => {
   const icon = document.getElementById("icon");
   const windSpeed = document.getElementById("wind-speed");
   const windDirection = document.getElementById("wind-direction");
+  const rainChance = document.getElementById("rain-chance");
 
   // LOCATION
   location.innerText = `${locationData.name}, ${locationData.state}`;
@@ -78,6 +79,9 @@ const addWeatherToUI = (weatherPayload, locationData) => {
   // rotate the wind icon to show the appropriate direction (minus from 360 to reverse it)
   windDirection.style.transform = `rotate(${360 - weatherPayload.wind.deg}deg)`;
   utils.checkDayTime(utils.returnDateFromUnix(weatherPayload.dt));
+
+  // CHANCE OF RAIN
+  rainChance.innerText = `${futureWeather.list[0].pop * 100}%`;
 };
 
 export { updateBackground, addWeatherToUI, clearCityInput };

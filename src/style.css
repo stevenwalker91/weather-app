@@ -19,7 +19,7 @@ body {
     border-radius: 10px;
     grid-template-columns: 1fr 1fr;
     justify-items: center;
-    row-gap: 10px;
+    row-gap: 20px;
     align-items: center;
 }
 
@@ -60,7 +60,7 @@ body {
 }
 
 #icon {
-    font-size: 10em;
+    font-size: 8em;
 }
 
 label {
@@ -97,6 +97,7 @@ input {
         display: flex;
         flex-direction: column;
         min-width: 75%;
+
     }
 }
 

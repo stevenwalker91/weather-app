@@ -29,8 +29,17 @@ const getIcon = (weatherID, dayTime) => {
     icon = "cloudy";
   }
 
+  if (weatherID >= 700 && weatherID < 800) {
+    icon = "foggy";
+  }
+
   if (weatherID >= 800 && weatherID <= 802) {
     icon += dayTime;
+  }
+
+  //error handler for if no icon is available
+  if (icon === undefined) {
+    icon = "disabled_by_default";
   }
 
   // TODO add icon for 700 range
