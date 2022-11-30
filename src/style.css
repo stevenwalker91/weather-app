@@ -99,20 +99,19 @@ input {
         min-width: 75%;
 
     }
-}
 
-@media (max-width: 420px) {
-    
     #temperature {
         font-size: 4em;
     }
+    
     #icon {
         font-size: 6em;
     }
-
 }
 
-@media (max-height: 750px) {
+
+
+@media (max-height: 750px) and (max-width: 4630px) {
     .detail-container {
         flex-direction: row;
 
